@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "../01-阶段一（HTML）/html5"
+        }
+    ],
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            
+            {
+                "type": "lldb-dap",
+                "request": "launch",
+                "name": "Debug",
+                "program": "${workspaceRoot}/<your program>",
+                "args": [],
+                "env": [],
+                "cwd": "${workspaceRoot}"
+            }
+        ]
+    }
+}
