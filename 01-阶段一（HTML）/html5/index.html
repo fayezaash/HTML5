@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <style>
+    .horizontal-scroll img {
+      width: 100vw;
+      height: 90vh;
+      object-fit: cover;
+
+    }
+  </style>
+
+
+  <style>
+    .dark-mode {
+      background: black !important;
+      color: beige !important;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode .horizontal-scroll img {
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .dark-img {
+      filter: brightness(1) grayscale(100) contrast(100) invert(100);
+      transition: filter 0.3s;
+    }
+
+    .horizontal-scroll ul {
+      position: relative;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ul li {
+      position: relative;
+    }
+
+    .ul li>div[id^="counter-"] {
+      position: absolute;
+      margin-top: 0%;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 90%;
+      background: green;
+      color: white;
+      border: 1px solid white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 1em;
+      z-index: 2;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .dark-mode .ul li>div[id^="counter-"] {
+      background: green;
+      color: white;
+      border: 1px solid white;
+    }
+
+
+    .ul li>button.reset-btn {
+      position: absolute;
+      top: 2%;
+      left: 60%;
+      transform: translateX(-50%);
+      z-index: 3;
+      background: red;
+      border: 1px solid white;
+      color: white;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .dark-mode .ul li>button.reset-btn {
+      background: red;
+      border: 1px solid white;
+      color: white;
+      top: 2%;
+      left: 60%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .toggle-dark-mode {
+      position: fixed;
+      z-index: 1000;
+      padding: 5px 10px;
+      background: black;
+      color: white;
+      border-radius: 10px;
+      border: 1px solid blue;
+    }
+
+    .dark-mode #toggle-dark-mode {
+      background: white;
+      color: red;
+      border: 1px solid blue;
+      border-radius: 10px;
+    }
+
+    #custom-scrollbar {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 40px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      overflow-x: auto;
+      direction: rtl;
+      /* لجعل الأزرار من اليمين لليسار */
+    }
+
+    #custom-scrollbar button {
+      margin: 0 5px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      background: green;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="horizontal-scroll" style="overflow-x: auto; white-space: nowrap;">
+    <ul class="ul" style="display: inline-flex; list-style: none; padding: 0; margin: 0;">
+
+      <li style="margin-left: 10px;">
+        <div id="counter-1">0</div>
+        <img src="img01.jpg" onclick="incrementCounter(1)">
+      </li>
+
+      <li style="margin-left: 10px;">
+        <div id="counter-2">0</div>
+        <img src="img02.jpg" onclick="incrementCounter(2)">
+      </li>
+
+      <li style="margin-left: 10px;">
+        <div id="counter-3">0</div>
+        <img src="img03.jpg" onclick="incrementCounter(3)">
+      </li>
+
+      <li style="margin-left: 10px;">
+        <div id="counter-4">0</div>
+        <img src="img04.jpg" onclick="incrementCounter(4)">
+      </li>
+
+      <li style="margin-left: 10px;">
+        <div id="counter-5">0</div>
+        <img src="img05.jpg" onclick="incrementCounter(5)">
+      </li>
+      <li style="margin-left: 10px;">
+        <div id="counter-6">0</div>
+        <img src="img06.jpg" onclick="incrementCounter(6)">
+      </li>
+      <li style="margin-left: 10px;">
+        <div id="counter-7">0</div>
+        <img src="img07.jpg" onclick="incrementCounter(7)">
+      </li>
+      <li style="margin-left: 10px;">
+        <div id="counter-8">0</div>
+        <img src="img08.jpg" onclick="incrementCounter(8)">
+      </li>
+      <li style="margin-left: 10px;">
+        <div id="counter-9">0</div>
+        <img src="img09.jpg" onclick="incrementCounter(9)">
+      </li>
+      <li style="margin-left: 10px;">
+        <div id="counter-10">0</div>
+        <img src="img10.jpg" onclick="incrementCounter(10)">
+      </li>
+
+
+
+      <button id="toggle-dark-mode" style="position: fixed; top: 10px; left: 10px; z-index: 1000;">عاتم</button>
+
+    </ul>
+  </div>
+
+  <script src="5.js"></script>
+  <script>
+    // Toggle dark mode and image filter
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('toggle-dark-mode');
+      btn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+        document.querySelectorAll('.horizontal-scroll img').forEach(img => {
+          img.classList.toggle('dark-img');
+        });
+      });
+    });
+
+    // Counter increment and reset
+    function incrementCounter(id) {
+      const counterDiv = document.getElementById(`counter-${id}`);
+      let value = parseInt(counterDiv.textContent);
+      counterDiv.textContent = value + 1;
+    }
+
+    function resetCounter(id) {
+      const counterDiv = document.getElementById(`counter-${id}`);
+      counterDiv.textContent = '0';
+    }
+
+    // Add reset buttons to each image
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.ul li').forEach((li, idx) => {
+        const img = li.querySelector('img');
+        const counterId = idx + 1;
+        // Avoid duplicate buttons
+        if (!li.querySelector('.reset-btn')) {
+          const btn = document.createElement('button');
+          btn.textContent = 'تصفير';
+          btn.className = 'reset-btn';
+          btn.onclick = function () { resetCounter(counterId); };
+          li.appendChild(btn);
+        }
+      });
+    });
+  </script>
+
+  <div style="width: 100%; overflow-x: auto; white-space: nowrap;">
+    <div style="display: inline-block; width: 400px;">محتوى أفقي 1</div>
+    <div style="display: inline-block; width: 400px;">محتوى أفقي 2</div>
+  </div>
+
+</body>
+</html>

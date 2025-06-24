@@ -1,0 +1,32 @@
+
+.element {
+  background-image: url('img2.jpg');
+  filter: brightness(0.8) contrast(1.2) grayscale(0.2);
+  /* يمكنك تعديل القيم حسب الحاجة */
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+li {
+  width:100vw;
+  height:100vh;
+}
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.fullscreen {
+  width: 95vw;
+  height: 100vh;
+  object-fit: cover;
+  /* إضافة تأثيرات تحرير نص الصورة */
+        filter: brightness(0.9) contrast(1.1) grayscale(0.1);
+        /* يمكنك تعديل القيم حسب الحاجة */
+    }
+
